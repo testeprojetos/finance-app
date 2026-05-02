@@ -1,0 +1,58 @@
+// ============================================================
+// APP — roteamento principal e inicialização do Firebase Auth
+// ============================================================
+
+import React, { useEffect } from 'react';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { onAuthChange } from './services/auth.service';
+import { useAuthStore } from './store/auth.store';
+import { AppShell } from './components/layout/AppShell';
+import { ToastProvider } from './components/ui/Toast';
+import { LoadingSpinner } from './components/ui/LoadingSpinner';
+import { Login } from './pages/Login/Login';
+import { Dashboard } from './pages/Dashboard/Dashboard';
+import { Transactions } from './pages/Transactions/Transactions';
+import { Reports } from './pages/Reports/Reports';
+
+const App: React.FC = () => {
+  const { user, loading, setUser } = useAuthStore();
+
+  // Observa o estado de autenticação do Firebase
+  useEffect(() => {
+    const unsubscribe = onAuthChange(setUser);
+    return unsubscribe;
+  }, [setUser]);
+
+  // Aguarda o Firebase confirmar o estado de auth antes de renderizar
+  if (loading) {
+    return <LoadingSpinner fullScreen />;
+  }
+
+  return (
+    <ToastProvider>
+      <HashRouter>
+        <Routes>
+          {/* Rota pública */}
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/dashboard" replace /> : <Login />}
+          />
+
+          {/* Rotas protegidas */}
+          {user ? (
+            <Route element={<AppShell />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            </Route>
+          ) : (
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          )}
+        </Routes>
+      </HashRouter>
+    </ToastProvider>
+  );
+};
+
+export default App;

@@ -1,0 +1,111 @@
+// ============================================================
+// TIPOS GLOBAIS DA APLICAÇÃO
+// ============================================================
+
+// --- Enums ---
+
+export type TransactionType = 'income' | 'expense';
+
+// --- Categorias ---
+
+export interface Category {
+  id: string;
+  name: string;
+  type: TransactionType;
+  icon: string;
+  color: string;
+}
+
+// --- Subcategorias ---
+
+export interface Subcategory {
+  id: string;
+  categoryId: string;
+  name: string;
+  createdAt: string; // ISO 8601
+}
+
+// --- Transações ---
+
+export interface Transaction {
+  id: string;
+  categoryId: string;
+  subcategoryId?: string; // opcional — transação pode ser direto na categoria
+  description: string;
+  amount: number;
+  date: string; // ISO 8601 (YYYY-MM-DD)
+  observation?: string;
+  type: TransactionType;
+  monthKey: string; // formato: "YYYY-MM" — facilita queries por mês
+  createdAt: string; // ISO 8601
+}
+
+// --- Resumo mensal (calculado no frontend) ---
+
+export interface MonthlySummary {
+  monthKey: string;
+  totalIncome: number;
+  totalExpense: number;
+  balance: number;
+  savingsGoal: number;
+  savingsGoalProgress: number; // percentual 0-100
+}
+
+// --- Meta de economia ---
+
+export interface SavingsGoal {
+  id: string;
+  monthKey: string;
+  amount: number;
+}
+
+// --- Relatório de centro de custos ---
+
+export interface CostCenterItem {
+  level: number; // 1 = categoria, 2 = subcategoria
+  code: string;  // ex: "1", "1.1", "1.2.1"
+  name: string;
+  total: number;
+  transactions: Transaction[];
+  children?: CostCenterItem[];
+}
+
+export interface CostCenterReport {
+  period: {
+    from: string; // YYYY-MM
+    to: string;   // YYYY-MM
+  };
+  income: CostCenterItem[];
+  expense: CostCenterItem[];
+  totalIncome: number;
+  totalExpense: number;
+  balance: number;
+}
+
+// --- Estado do carrossel de meses ---
+
+export interface MonthCarouselState {
+  currentMonthKey: string; // "YYYY-MM"
+  availableMonths: string[]; // lista de meses com dados
+}
+
+// --- Formulários ---
+
+export interface TransactionFormData {
+  categoryId: string;
+  subcategoryId?: string;
+  description: string;
+  amount: string; // string para facilitar input, convertido antes de salvar
+  date: string;
+  observation?: string;
+}
+
+export interface SubcategoryFormData {
+  name: string;
+  categoryId: string;
+}
+
+export interface SavingsGoalFormData {
+  amount: string;
+  monthKey: string;
+}
