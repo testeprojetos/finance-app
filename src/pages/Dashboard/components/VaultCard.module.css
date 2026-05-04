@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  background: linear-gradient(135deg, #f9a825 0%, #fb8c00 100%);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
-  box-shadow: 0 4px 14px rgba(253, 160, 133, 0.35);
+  box-shadow: 0 4px 18px rgba(249, 168, 37, 0.35);
   cursor: pointer;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
   user-select: none;
@@ -13,7 +13,7 @@
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(253, 160, 133, 0.45);
+  box-shadow: 0 6px 22px rgba(249, 168, 37, 0.45);
 }
 
 .card:active {
