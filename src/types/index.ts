@@ -59,6 +59,28 @@ export interface SavingsGoal {
   amount: number;
 }
 
+// --- Cofre ---
+
+export type VaultEntryType = 'deposit' | 'withdraw';
+
+export interface VaultEntry {
+  id: string;
+  type: VaultEntryType;
+  amount: number;
+  date: string;        // YYYY-MM-DD
+  description: string;
+  observation?: string;
+  createdAt: string;
+}
+
+export interface VaultEntryFormData {
+  type: VaultEntryType;
+  amount: string;
+  date: string;
+  description: string;
+  observation?: string;
+}
+
 // --- Relatório de centro de custos ---
 
 export interface CostCenterItem {

@@ -12,6 +12,7 @@ import styles from './TopNav.module.css';
 const NAV_ITEMS = [
   { to: '/dashboard', label: '🏠 Início' },
   { to: '/transactions', label: '💸 Lançamentos' },
+  { to: '/vault', label: '🏦 Cofre' },
   { to: '/reports', label: '📊 Relatórios' },
 ];
 

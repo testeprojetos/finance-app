@@ -13,6 +13,7 @@ import { Login } from './pages/Login/Login';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Transactions } from './pages/Transactions/Transactions';
 import { Reports } from './pages/Reports/Reports';
+import { Vault } from './pages/Vault/Vault';
 
 const App: React.FC = () => {
   const { user, loading, setUser } = useAuthStore();
@@ -43,6 +44,7 @@ const App: React.FC = () => {
             <Route element={<AppShell />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/transactions" element={<Transactions />} />
+              <Route path="/vault" element={<Vault />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Route>

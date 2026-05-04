@@ -7,12 +7,15 @@ import { MonthCarousel } from '../../components/month-carousel/MonthCarousel';
 import { SummaryCards } from './components/SummaryCards';
 import { CategoryList } from './components/CategoryList';
 import { MonthHeader } from './components/MonthHeader';
+import { VaultCard } from './components/VaultCard';
 import { useUIStore } from '../../store/ui.store';
 import { useTransactionStore } from '../../store/transaction.store';
 import { useAuthStore } from '../../store/auth.store';
+import { useVaultStore } from '../../store/vault.store';
 import { getTransactionsByMonth } from '../../services/transaction.service';
 import { getSavingsGoalByMonth } from '../../services/savingsGoal.service';
 import { getAllSubcategories } from '../../services/subcategory.service';
+import { getVaultEntries } from '../../services/vault.service';
 import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
 import { useToast } from '../../components/ui/Toast';
 import styles from './Dashboard.module.css';
@@ -28,6 +31,7 @@ export const Dashboard: React.FC = () => {
   } = useTransactionStore();
   const { user } = useAuthStore();
   const { showToast } = useToast();
+  const { setEntries: setVaultEntries } = useVaultStore();
 
   // Carrega transações e meta ao mudar o mês
   useEffect(() => {
@@ -50,17 +54,21 @@ export const Dashboard: React.FC = () => {
     load();
   }, [selectedMonthKey, user]);
 
-  // Carrega subcategorias uma única vez
+  // Carrega subcategorias e cofre uma única vez
   useEffect(() => {
     if (!user) return;
 
     const load = async () => {
       useTransactionStore.getState().setLoadingSubcategories(true);
       try {
-        const subs = await getAllSubcategories(user.uid);
+        const [subs, vaultData] = await Promise.all([
+          getAllSubcategories(user.uid),
+          getVaultEntries(user.uid),
+        ]);
         setSubcategories(subs);
+        setVaultEntries(vaultData);
       } catch {
-        showToast('Erro ao carregar subcategorias.', 'error');
+        showToast('Erro ao carregar dados.', 'error');
         useTransactionStore.getState().setLoadingSubcategories(false);
       }
     };
@@ -90,6 +98,7 @@ export const Dashboard: React.FC = () => {
       ) : (
         <>
           <SummaryCards />
+          <VaultCard />
           <CategoryList monthKey={selectedMonthKey} />
         </>
       )}

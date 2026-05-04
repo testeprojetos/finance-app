@@ -9,6 +9,7 @@ import styles from './BottomNav.module.css';
 const NAV_ITEMS = [
   { to: '/dashboard', icon: '🏠', label: 'Início' },
   { to: '/transactions', icon: '💸', label: 'Lançamentos' },
+  { to: '/vault', icon: '🏦', label: 'Cofre' },
   { to: '/reports', icon: '📊', label: 'Relatórios' },
 ];
 
