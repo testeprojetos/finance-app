@@ -18,20 +18,20 @@
   border-radius: var(--radius-md);
   background: var(--gradient-primary);
   color: white;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
   flex-shrink: 0;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
-  box-shadow: var(--shadow-sm);
+  transition: opacity var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
 }
 
 .arrow:hover {
-  opacity: 0.85;
-  transform: scale(1.05);
+  opacity: 0.9;
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(102, 126, 234, 0.5);
 }
 
 .arrow:active {
-  transform: scale(0.97);
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.3);
 }
 
 .center {
