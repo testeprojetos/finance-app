@@ -57,6 +57,14 @@
 /* ─── Ticker strip ───────────────────────────────────────── */
 /* removido */
 
+/* ─── Theme toggle ───────────────────────────────────────── */
+.themeToggleWrapper {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 20;
+}
+
 /* ─── Card ───────────────────────────────────────────────── */
 .loginCard {
   position: relative;
@@ -314,4 +322,52 @@
   .loginCard { padding: 1.75rem 1.5rem; }
   .cardTitle { font-size: 1.45rem; }
   .statsRow { padding: 0.65rem 0.75rem; }
+}
+
+/* ─── Light mode overrides ───────────────────────────────── */
+:global([data-theme="light"]) .loginRoot {
+  --bg:           #f0f2f5;
+  --surface:      #ffffff;
+  --surface-2:    #f4f6fb;
+  --border:       rgba(91, 106, 245, 0.12);
+  --border-hover: rgba(91, 106, 245, 0.25);
+  --accent:       #5b6af5;
+  --accent-dim:   rgba(91, 106, 245, 0.10);
+  --blue:         #5b6af5;
+  --red:          #f04e60;
+  --text-1:       #141b2d;
+  --text-2:       #5a6580;
+  --text-3:       #9aa3bb;
+}
+
+:global([data-theme="light"]) .bgGrid {
+  background-image:
+    linear-gradient(rgba(91, 106, 245, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 106, 245, 0.04) 1px, transparent 1px);
+}
+
+:global([data-theme="light"]) .bgGlow {
+  background: radial-gradient(circle, rgba(91, 106, 245, 0.06) 0%, transparent 70%);
+}
+
+:global([data-theme="light"]) .loginCard {
+  box-shadow:
+    0 0 0 1px rgba(91, 106, 245, 0.06),
+    0 24px 80px rgba(20, 27, 45, 0.12),
+    0 4px 16px rgba(20, 27, 45, 0.06);
+}
+
+:global([data-theme="light"]) .submitBtn {
+  background: linear-gradient(135deg, #5b6af5 0%, #4a59e0 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(91, 106, 245, 0.35);
+}
+
+:global([data-theme="light"]) .submitBtn:hover:not(:disabled) {
+  box-shadow: 0 8px 28px rgba(91, 106, 245, 0.45);
+}
+
+:global([data-theme="light"]) .spinner {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: white;
 }

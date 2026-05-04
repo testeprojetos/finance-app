@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { signIn, resetPassword } from "../../services/auth.service";
 import { useToast } from "../../components/ui/Toast";
+import { ThemeToggle } from "../../components/ui/ThemeToggle";
 import styles from "./LoginV2.module.css";
 
 type Mode = 'signin' | 'reset';
@@ -48,6 +49,11 @@ export const Login = () => {
       {/* Background grid + glow */}
       <div className={styles.bgGrid} />
       <div className={styles.bgGlow} />
+
+      {/* Theme toggle — canto superior direito */}
+      <div className={styles.themeToggleWrapper}>
+        <ThemeToggle />
+      </div>
 
       <div className={styles.loginCard}>
         {/* Logo */}

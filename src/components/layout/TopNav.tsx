@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { logOut } from '../../services/auth.service';
 import { useAuthStore } from '../../store/auth.store';
 import { useToast } from '../ui/Toast';
+import { ThemeToggle } from '../ui/ThemeToggle';
 import styles from './TopNav.module.css';
 
 const NAV_ITEMS = [
@@ -49,6 +50,7 @@ export const TopNav: React.FC = () => {
 
         <div className={styles.user}>
           <span className={styles.email}>{user?.email}</span>
+          <ThemeToggle />
           <button className={styles.logoutBtn} onClick={handleLogout}>
             Sair
           </button>
