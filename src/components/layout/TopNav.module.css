@@ -21,11 +21,11 @@
 .logo {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-primary);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .nav {
@@ -94,6 +94,10 @@
 }
 
 /* Dark mode: nav ativa com verde e texto escuro */
+:global([data-theme="dark"]) .logo {
+  color: #1fffb3;
+}
+
 :global([data-theme="dark"]) .active {
   background: #1fffb3 !important;
   color: #071612 !important;
