@@ -23,17 +23,27 @@ export default defineConfig({
         start_url: '/finance-app/',
         icons: [
           {
-            src: 'icons/icon-192.png',
-            sizes: '192x192',
+            src: 'icons/icon-1254x1254.png',
+            sizes: '1254x1254',
             type: 'image/png',
           },
           {
-            src: 'icons/icon-512.png',
+            src: 'icons/icon-1254x1254.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: 'icons/icon-512.png',
+            src: 'icons/icon-1254x1254.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-1254x1254.png',
+            sizes: '180x180',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-1254x1254.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable',
