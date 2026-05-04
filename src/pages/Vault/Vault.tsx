@@ -11,6 +11,7 @@ import { formatDate } from '../../utils/date';
 import { Button } from '../../components/ui/Button';
 import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
 import { useToast } from '../../components/ui/Toast';
+import { usePrivacy } from '../../context/PrivacyContext';
 import { VaultEntryModal } from './components/VaultEntryModal';
 import type { VaultEntryType } from '../../types';
 import styles from './Vault.module.css';
@@ -84,6 +85,7 @@ export const Vault: React.FC = () => {
 
   const deposits  = entries.filter(e => e.type === 'deposit').reduce((s, e) => s + e.amount, 0);
   const withdraws = entries.filter(e => e.type === 'withdraw').reduce((s, e) => s + e.amount, 0);
+  const { privateCurrency } = usePrivacy();
 
   return (
     <div className={styles.page}>

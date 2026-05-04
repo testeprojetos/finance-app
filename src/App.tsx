@@ -9,6 +9,7 @@ import { useAuthStore } from './store/auth.store';
 import { AppShell } from './components/layout/AppShell';
 import { ToastProvider } from './components/ui/Toast';
 import { ThemeProvider } from './context/ThemeContext';
+import { PrivacyProvider } from './context/PrivacyContext';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
 import { Login } from './pages/LoginV2/LoginV2';
 import { Dashboard } from './pages/Dashboard/Dashboard';
@@ -32,7 +33,8 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider>
-      <ToastProvider>
+      <PrivacyProvider>
+        <ToastProvider>
         <HashRouter>
         <Routes>
           {/* Rota pública */}
@@ -55,8 +57,9 @@ const App: React.FC = () => {
           )}
         </Routes>
       </HashRouter>
-    </ToastProvider>
-  </ThemeProvider>
+        </ToastProvider>
+      </PrivacyProvider>
+    </ThemeProvider>
   );
 };
 

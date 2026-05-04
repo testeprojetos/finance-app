@@ -5,11 +5,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useVaultStore } from '../../../store/vault.store';
-import { formatCurrency } from '../../../utils/currency';
+import { usePrivacy } from '../../../context/PrivacyContext';
 import styles from './VaultCard.module.css';
 
 export const VaultCard: React.FC = () => {
   const { balance, entries } = useVaultStore();
+  const { privateCurrency } = usePrivacy();
   const navigate = useNavigate();
 
   return (
@@ -25,7 +26,7 @@ export const VaultCard: React.FC = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <span className={styles.balance}>{formatCurrency(balance)}</span>
+        <span className={styles.balance}>{privateCurrency(balance)}</span>
         <span className={styles.arrow}>›</span>
       </div>
     </div>

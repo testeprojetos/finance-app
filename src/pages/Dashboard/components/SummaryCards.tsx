@@ -4,11 +4,13 @@
 
 import React from 'react';
 import { useTransactionStore } from '../../../store/transaction.store';
+import { usePrivacy } from '../../../context/PrivacyContext';
 import { formatCurrency } from '../../../utils/currency';
 import styles from './SummaryCards.module.css';
 
 export const SummaryCards: React.FC = () => {
   const { monthlySummary } = useTransactionStore();
+  const { privateCurrency } = usePrivacy();
 
   const cards = [
     {
@@ -51,7 +53,7 @@ export const SummaryCards: React.FC = () => {
             <span className={styles.label}>{card.label}</span>
           </div>
           <div className={[styles.value, card.colorClass].join(' ')}>
-            {formatCurrency(card.value)}
+            {privateCurrency(card.value)}
           </div>
           {card.extra && <div className={styles.extra}>{card.extra}</div>}
         </div>
