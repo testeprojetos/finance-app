@@ -15,6 +15,33 @@ import { VaultEntryModal } from './components/VaultEntryModal';
 import type { VaultEntryType } from '../../types';
 import styles from './Vault.module.css';
 
+// Ícone SVG do cofre
+const VaultIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 9v-2M12 17v-2M9 12H7M17 12h-2" />
+    <path d="M6 4V2M18 4V2" />
+    <circle cx="12" cy="12" r="1" fill="white" stroke="none" />
+  </svg>
+);
+
+// Ícone de depósito
+const DepositIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3v12M7 10l5 5 5-5" />
+    <path d="M5 20h14" />
+  </svg>
+);
+
+// Ícone de retirada
+const WithdrawIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 21V9M7 14l5-5 5 5" />
+    <path d="M5 4h14" />
+  </svg>
+);
+
 export const Vault: React.FC = () => {
   const { entries, balance, loading, setEntries, setLoading, removeEntry } = useVaultStore();
   const { user } = useAuthStore();
@@ -55,57 +82,71 @@ export const Vault: React.FC = () => {
     setModalOpen(true);
   };
 
+  const deposits  = entries.filter(e => e.type === 'deposit').reduce((s, e) => s + e.amount, 0);
+  const withdraws = entries.filter(e => e.type === 'withdraw').reduce((s, e) => s + e.amount, 0);
+
   return (
     <div className={styles.page}>
       {/* Saldo */}
       <div className={styles.balanceCard}>
-        <span className={styles.balanceIcon}>🏦</span>
+        <div className={styles.balanceIconWrapper}>
+          <VaultIcon />
+        </div>
         <span className={styles.balanceLabel}>Saldo do Cofre</span>
         <span className={styles.balanceValue}>{formatCurrency(balance)}</span>
+        <span className={styles.balanceCount}>
+          {entries.length} movimentação{entries.length !== 1 ? 'ões' : ''}
+          {entries.length > 0 && ` · +${formatCurrency(deposits)} / -${formatCurrency(withdraws)}`}
+        </span>
       </div>
 
       {/* Ações */}
       <div className={styles.actions}>
-        <Button
-          variant="income"
-          fullWidth
-          onClick={() => openModal('deposit')}
-          icon="⬇️"
-        >
+        <Button variant="income" fullWidth onClick={() => openModal('deposit')} icon={<DepositIcon />}>
           Depositar
         </Button>
-        <Button
-          variant="expense"
-          fullWidth
-          onClick={() => openModal('withdraw')}
-          icon="⬆️"
-        >
+        <Button variant="expense" fullWidth onClick={() => openModal('withdraw')} icon={<WithdrawIcon />}>
           Retirar
         </Button>
       </div>
 
       {/* Histórico */}
       <div className={styles.history}>
-        <h2 className={styles.historyTitle}>Histórico</h2>
+        <div className={styles.historyHeader}>
+          <h2 className={styles.historyTitle}>Histórico</h2>
+          {entries.length > 0 && (
+            <span className={styles.historyCount}>{entries.length}</span>
+          )}
+        </div>
 
         {loading ? (
           <div className={styles.loading}><LoadingSpinner /></div>
         ) : entries.length === 0 ? (
-          <p className={styles.empty}>Nenhuma movimentação ainda.</p>
+          <div className={styles.empty}>
+            <span className={styles.emptyIcon}>🏦</span>
+            <span>Nenhuma movimentação ainda.</span>
+          </div>
         ) : (
           <div className={styles.list}>
             {entries.map((entry) => (
               <div key={entry.id} className={styles.entry}>
-                <div className={styles.entryIcon}>
-                  {entry.type === 'deposit' ? '⬇️' : '⬆️'}
+                <div className={[
+                  styles.entryIconWrapper,
+                  entry.type === 'deposit' ? styles.entryIconDeposit : styles.entryIconWithdraw,
+                ].join(' ')}>
+                  {entry.type === 'deposit' ? <DepositIcon /> : <WithdrawIcon />}
                 </div>
+
                 <div className={styles.entryInfo}>
                   <span className={styles.entryDesc}>{entry.description}</span>
-                  <span className={styles.entryDate}>{formatDate(entry.date)}</span>
+                  <span className={styles.entryMeta}>
+                    {entry.type === 'deposit' ? 'Depósito' : 'Retirada'} · {formatDate(entry.date)}
+                  </span>
                   {entry.observation && (
                     <span className={styles.entryObs}>{entry.observation}</span>
                   )}
                 </div>
+
                 <div className={styles.entryRight}>
                   <span className={[
                     styles.entryAmount,
