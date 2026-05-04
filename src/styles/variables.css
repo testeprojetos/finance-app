@@ -4,11 +4,11 @@
 
 :root {
   /* --- Cores principais --- */
-  --color-primary: #667eea;
-  --color-primary-dark: #5a6fd6;
-  --color-primary-light: #8fa4f3;
+  --color-primary: #5b6af5;
+  --color-primary-dark: #4a59e0;
+  --color-primary-light: #7b8af7;
 
-  --color-secondary: #764ba2;
+  --color-secondary: #5b6af5;
 
   /* --- Semânticas --- */
   --color-income: #27ae60;
@@ -38,8 +38,8 @@
   --color-text-inverse: #ffffff;
 
   /* --- Gradientes --- */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-header: linear-gradient(45deg, #2c3e50, #3498db);
+  --gradient-primary: #5b6af5;
+  --gradient-header: #5b6af5;
   --gradient-income: linear-gradient(45deg, #27ae60, #2ecc71);
   --gradient-expense: linear-gradient(45deg, #e74c3c, #c0392b);
   --gradient-warning: linear-gradient(45deg, #f39c12, #e67e22);
