@@ -1,10 +1,11 @@
 // ============================================================
 // COMPONENTE: MonthCarousel
-// Carrossel de seleção de mês com scroll horizontal.
+// Navegação de mês no estilo "rodada de campeonato":
+// ← | MÊS ANO | →
 // ============================================================
 
-import React, { useRef, useEffect } from 'react';
-import { generateCarouselMonths, formatMonthLabel, formatMonthShort } from '../../utils/date';
+import React from 'react';
+import { formatMonthLabel, addMonths } from '../../utils/date';
 import styles from './MonthCarousel.module.css';
 
 interface MonthCarouselProps {
@@ -18,46 +19,34 @@ export const MonthCarousel: React.FC<MonthCarouselProps> = ({
   onSelect,
   monthsWithData = [],
 }) => {
-  const months = generateCarouselMonths(selectedMonthKey);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const selectedRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (selectedRef.current && containerRef.current) {
-      const container = containerRef.current;
-      const selected = selectedRef.current;
-      const offset =
-        selected.offsetLeft - container.clientWidth / 2 + selected.clientWidth / 2;
-      container.scrollTo({ left: offset, behavior: 'smooth' });
-    }
-  }, [selectedMonthKey]);
+  const prevMonth = addMonths(selectedMonthKey, -1);
+  const nextMonth = addMonths(selectedMonthKey, 1);
+  const hasData = monthsWithData.includes(selectedMonthKey);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.track} ref={containerRef} role="tablist" aria-label="Selecionar mês">
-        {months.map((monthKey) => {
-          const isSelected = monthKey === selectedMonthKey;
-          const hasData = monthsWithData.includes(monthKey);
-          const [month, year] = formatMonthShort(monthKey).split('|');
+      <button
+        className={styles.arrow}
+        onClick={() => onSelect(prevMonth)}
+        aria-label="Mês anterior"
+      >
+        ←
+      </button>
 
-          return (
-            <button
-              key={monthKey}
-              ref={isSelected ? selectedRef : null}
-              className={[styles.item, isSelected ? styles.selected : ''].filter(Boolean).join(' ')}
-              onClick={() => onSelect(monthKey)}
-              role="tab"
-              aria-selected={isSelected}
-              aria-label={formatMonthLabel(monthKey)}
-              title={formatMonthLabel(monthKey)}
-            >
-              <span className={styles.month}>{month}</span>
-              <span className={styles.year}>{year}</span>
-              {hasData && <span className={styles.dot} aria-hidden="true" />}
-            </button>
-          );
-        })}
+      <div className={styles.center}>
+        <span className={styles.label}>
+          {formatMonthLabel(selectedMonthKey)}
+        </span>
+        {hasData && <span className={styles.dot} aria-hidden="true" />}
       </div>
+
+      <button
+        className={styles.arrow}
+        onClick={() => onSelect(nextMonth)}
+        aria-label="Próximo mês"
+      >
+        →
+      </button>
     </div>
   );
 };

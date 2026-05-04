@@ -1,83 +1,71 @@
 .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  overflow: hidden;
+  padding: var(--space-3) var(--space-4);
+  gap: var(--space-3);
 }
 
-.track {
+.arrow {
   display: flex;
-  gap: var(--space-1);
-  overflow-x: auto;
-  padding: var(--space-2);
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.track::-webkit-scrollbar {
-  display: none;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  padding: var(--space-2) var(--space-3);
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-  scroll-snap-align: center;
-  transition: all var(--transition-fast);
-  min-width: 52px;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.item:hover {
-  background: var(--color-surface-2);
-  color: var(--color-text-primary);
-}
-
-.selected {
   background: var(--gradient-primary);
   color: white;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
   box-shadow: var(--shadow-sm);
 }
 
-.selected:hover {
-  color: white;
-}
-
-.month {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1;
-  letter-spacing: 0.2px;
-}
-
-.year {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-normal);
-  opacity: 0.75;
-  line-height: 1;
-}
-
-.selected .year {
+.arrow:hover {
   opacity: 0.85;
+  transform: scale(1.05);
 }
 
-/* Indicador de dados */
+.arrow:active {
+  transform: scale(0.97);
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  position: relative;
+}
+
+.label {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+/* Indicador de dados no mês */
 .dot {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--color-primary);
-  position: absolute;
-  bottom: 3px;
 }
 
-.selected .dot {
-  background: rgba(255, 255, 255, 0.9);
+@media (min-width: 768px) {
+  .label {
+    font-size: var(--font-size-xl);
+  }
+
+  .arrow {
+    width: 44px;
+    height: 44px;
+  }
 }
