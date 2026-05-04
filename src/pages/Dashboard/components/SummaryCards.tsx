@@ -5,7 +5,6 @@
 import React from 'react';
 import { useTransactionStore } from '../../../store/transaction.store';
 import { usePrivacy } from '../../../context/PrivacyContext';
-import { formatCurrency } from '../../../utils/currency';
 import styles from './SummaryCards.module.css';
 
 export const SummaryCards: React.FC = () => {

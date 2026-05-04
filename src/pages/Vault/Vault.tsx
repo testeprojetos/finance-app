@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { useVaultStore } from '../../store/vault.store';
 import { useAuthStore } from '../../store/auth.store';
 import { getVaultEntries, deleteVaultEntry } from '../../services/vault.service';
-import { formatCurrency } from '../../utils/currency';
 import { formatDate } from '../../utils/date';
+
 import { Button } from '../../components/ui/Button';
 import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
 import { useToast } from '../../components/ui/Toast';
@@ -83,9 +83,9 @@ export const Vault: React.FC = () => {
     setModalOpen(true);
   };
 
+  const { privateCurrency } = usePrivacy();
   const deposits  = entries.filter(e => e.type === 'deposit').reduce((s, e) => s + e.amount, 0);
   const withdraws = entries.filter(e => e.type === 'withdraw').reduce((s, e) => s + e.amount, 0);
-  const { privateCurrency } = usePrivacy();
 
   return (
     <div className={styles.page}>
@@ -95,10 +95,10 @@ export const Vault: React.FC = () => {
           <VaultIcon />
         </div>
         <span className={styles.balanceLabel}>Saldo do Cofre</span>
-        <span className={styles.balanceValue}>{formatCurrency(balance)}</span>
+        <span className={styles.balanceValue}>{privateCurrency(balance)}</span>
         <span className={styles.balanceCount}>
           {entries.length} movimentação{entries.length !== 1 ? 'ões' : ''}
-          {entries.length > 0 && ` · +${formatCurrency(deposits)} / -${formatCurrency(withdraws)}`}
+          {entries.length > 0 && ` · +${privateCurrency(deposits)} / -${privateCurrency(withdraws)}`}
         </span>
       </div>
 
@@ -154,7 +154,7 @@ export const Vault: React.FC = () => {
                     styles.entryAmount,
                     entry.type === 'deposit' ? styles.deposit : styles.withdraw,
                   ].join(' ')}>
-                    {entry.type === 'deposit' ? '+' : '-'} {formatCurrency(entry.amount)}
+                    {entry.type === 'deposit' ? '+' : '-'} {privateCurrency(entry.amount)}
                   </span>
                   <button
                     className={styles.deleteBtn}

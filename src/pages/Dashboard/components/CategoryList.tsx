@@ -5,7 +5,6 @@
 import React, { useState } from 'react';
 import { INCOME_CATEGORIES, EXPENSE_CATEGORIES } from '../../../config/categories';
 import { useTransactionStore } from '../../../store/transaction.store';
-import { formatCurrency } from '../../../utils/currency';
 import { usePrivacy } from '../../../context/PrivacyContext';
 import { CategoryDetail } from './CategoryDetail';
 import type { Category } from '../../../types';
