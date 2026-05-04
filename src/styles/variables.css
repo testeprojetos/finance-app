@@ -110,11 +110,11 @@
 
 [data-theme="dark"] {
   /* --- Cores principais --- */
-  --color-primary: #5b6af5;
-  --color-primary-dark: #4a59e0;
-  --color-primary-light: rgba(91, 106, 245, 0.25);
+  --color-primary: #1fffb3;
+  --color-primary-dark: #00d9a3;
+  --color-primary-light: rgba(31, 255, 179, 0.15);
 
-  --color-secondary: #5b6af5;
+  --color-secondary: #1fffb3;
 
   /* --- Semânticas --- */
   --color-income: #0db87e;
@@ -141,7 +141,7 @@
   --color-text-primary: #e8f1ff;
   --color-text-secondary: #7a94b8;
   --color-text-muted: #3d5470;
-  --color-text-inverse: #080d12;
+  --color-text-inverse: #071612;
 
   /* --- Gradientes --- */
   --gradient-primary: #5b6af5;
@@ -155,4 +155,16 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================================
+   DARK MODE — focus rings com cor primária verde
+   ============================================================ */
+
+[data-theme="dark"] .input:focus,
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: #1fffb3 !important;
+  box-shadow: 0 0 0 3px rgba(31, 255, 179, 0.12) !important;
 }

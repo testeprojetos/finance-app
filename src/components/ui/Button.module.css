@@ -117,3 +117,14 @@
   align-items: center;
   font-size: 1.1em;
 }
+
+/* Dark mode: botão primary com verde e texto escuro */
+:global([data-theme="dark"]) .primary {
+  background: #1fffb3;
+  color: #071612;
+  box-shadow: 0 2px 8px rgba(31, 255, 179, 0.3);
+}
+
+:global([data-theme="dark"]) .primary:hover:not(:disabled) {
+  box-shadow: 0 4px 16px rgba(31, 255, 179, 0.45);
+}

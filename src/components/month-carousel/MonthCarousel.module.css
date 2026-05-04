@@ -69,3 +69,20 @@
     height: 44px;
   }
 }
+
+/* Dark mode: texto escuro sobre o verde */
+:global([data-theme="dark"]) .arrow {
+  background: #1fffb3;
+  color: #071612;
+  box-shadow: 0 2px 8px rgba(31, 255, 179, 0.35);
+}
+
+:global([data-theme="dark"]) .arrow:hover {
+  box-shadow: 0 4px 14px rgba(31, 255, 179, 0.5);
+}
+
+/* Item selecionado no carrossel */
+:global([data-theme="dark"]) .selected {
+  background: #1fffb3;
+  color: #071612;
+}

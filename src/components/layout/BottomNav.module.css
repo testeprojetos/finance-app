@@ -53,3 +53,12 @@
     display: none;
   }
 }
+
+/* Dark mode: nav ativa com verde */
+:global([data-theme="dark"]) .active {
+  color: #1fffb3;
+}
+
+:global([data-theme="dark"]) .item:hover {
+  color: #1fffb3;
+}

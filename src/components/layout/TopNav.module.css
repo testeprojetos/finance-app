@@ -92,3 +92,14 @@
     display: block;
   }
 }
+
+/* Dark mode: nav ativa com verde e texto escuro */
+:global([data-theme="dark"]) .active {
+  background: #1fffb3 !important;
+  color: #071612 !important;
+}
+
+:global([data-theme="dark"]) .link:hover {
+  background: rgba(31, 255, 179, 0.12);
+  color: #1fffb3;
+}

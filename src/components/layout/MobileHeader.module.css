@@ -22,3 +22,13 @@
     display: none;
   }
 }
+
+/* Dark mode */
+:global([data-theme="dark"]) .header {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+:global([data-theme="dark"]) .logo {
+  color: #1fffb3;
+}
