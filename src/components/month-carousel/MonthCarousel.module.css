@@ -9,10 +9,10 @@
   display: flex;
   gap: var(--space-1);
   overflow-x: auto;
-  padding: var(--space-3) var(--space-3);
+  padding: var(--space-2);
   scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .track::-webkit-scrollbar {
@@ -23,17 +23,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
+  justify-content: center;
+  gap: 2px;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   color: var(--color-text-muted);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  white-space: nowrap;
   scroll-snap-align: center;
   transition: all var(--transition-fast);
-  min-width: 56px;
+  min-width: 52px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .item:hover {
@@ -51,21 +50,34 @@
   color: white;
 }
 
-.label {
-  text-transform: capitalize;
+.month {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  letter-spacing: 0.2px;
+}
+
+.year {
   font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  opacity: 0.75;
+  line-height: 1;
+}
+
+.selected .year {
+  opacity: 0.85;
 }
 
 /* Indicador de dados */
 .dot {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--color-primary);
   position: absolute;
-  bottom: 4px;
+  bottom: 3px;
 }
 
 .selected .dot {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
 }

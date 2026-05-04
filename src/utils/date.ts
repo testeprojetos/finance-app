@@ -35,16 +35,20 @@ export const monthKeyToDate = (monthKey: string): Date => {
  */
 export const formatMonthLabel = (monthKey: string): string => {
   const date = monthKeyToDate(monthKey);
-  return date.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+  const label = date.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+  return label.charAt(0).toUpperCase() + label.slice(1);
 };
 
 /**
- * Formata monthKey para exibição curta.
- * Ex: "2026-05" → "Mai/26"
+ * Formata monthKey para exibição curta no carrossel.
+ * Ex: "2026-05" → { month: "Mai", year: "26" }
  */
 export const formatMonthShort = (monthKey: string): string => {
   const date = monthKeyToDate(monthKey);
-  return date.toLocaleDateString('pt-BR', { month: 'short', year: '2-digit' });
+  const month = date.toLocaleDateString('pt-BR', { month: 'short' });
+  const year = date.toLocaleDateString('pt-BR', { year: '2-digit' });
+  const monthClean = month.charAt(0).toUpperCase() + month.slice(1).replace('.', '');
+  return `${monthClean}|${year}`;
 };
 
 /**

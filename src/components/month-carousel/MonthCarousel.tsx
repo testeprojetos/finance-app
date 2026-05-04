@@ -10,7 +10,6 @@ import styles from './MonthCarousel.module.css';
 interface MonthCarouselProps {
   selectedMonthKey: string;
   onSelect: (monthKey: string) => void;
-  /** Meses que possuem dados (exibe indicador visual) */
   monthsWithData?: string[];
 }
 
@@ -23,7 +22,6 @@ export const MonthCarousel: React.FC<MonthCarouselProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedRef = useRef<HTMLButtonElement>(null);
 
-  // Centraliza o mês selecionado ao montar e ao mudar
   useEffect(() => {
     if (selectedRef.current && containerRef.current) {
       const container = containerRef.current;
@@ -40,6 +38,7 @@ export const MonthCarousel: React.FC<MonthCarouselProps> = ({
         {months.map((monthKey) => {
           const isSelected = monthKey === selectedMonthKey;
           const hasData = monthsWithData.includes(monthKey);
+          const [month, year] = formatMonthShort(monthKey).split('|');
 
           return (
             <button
@@ -52,7 +51,8 @@ export const MonthCarousel: React.FC<MonthCarouselProps> = ({
               aria-label={formatMonthLabel(monthKey)}
               title={formatMonthLabel(monthKey)}
             >
-              <span className={styles.label}>{formatMonthShort(monthKey)}</span>
+              <span className={styles.month}>{month}</span>
+              <span className={styles.year}>{year}</span>
               {hasData && <span className={styles.dot} aria-hidden="true" />}
             </button>
           );
