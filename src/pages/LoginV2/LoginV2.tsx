@@ -5,7 +5,7 @@ import styles from "./LoginV2.module.css";
 
 type Mode = 'signin' | 'reset';
 
-export const LoginV2 = () => {
+export const Login = () => {
   const [mode, setMode] = useState<Mode>('signin');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

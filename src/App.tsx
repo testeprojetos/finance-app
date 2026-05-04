@@ -9,8 +9,7 @@ import { useAuthStore } from './store/auth.store';
 import { AppShell } from './components/layout/AppShell';
 import { ToastProvider } from './components/ui/Toast';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
-import { Login } from './pages/Login/Login';
-import { LoginV2 } from './pages/LoginV2/LoginV2';
+import { Login } from './pages/LoginV2/LoginV2';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Transactions } from './pages/Transactions/Transactions';
 import { Reports } from './pages/Reports/Reports';
@@ -34,13 +33,11 @@ const App: React.FC = () => {
     <ToastProvider>
       <HashRouter>
         <Routes>
-          {/* Rotas públicas */}
+          {/* Rota pública */}
           <Route
             path="/login"
             element={user ? <Navigate to="/dashboard" replace /> : <Login />}
           />
-          {/* Login V2 — sempre acessível para preview, independente do estado de auth */}
-          <Route path="/login-v2" element={<LoginV2 />} />
 
           {/* Rotas protegidas */}
           {user ? (
