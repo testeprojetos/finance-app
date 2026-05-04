@@ -42,14 +42,18 @@ const App: React.FC = () => {
 
           {/* Rotas protegidas */}
           {user ? (
-            <Route element={<AppShell />}>
-              <Route path="/dashboard" element={<Dashboard />} />
+            <>
+              {/* Dashboard V2 — preview com layout próprio, fora do AppShell */}
               <Route path="/dashboard-v2" element={<DashboardV2 />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/vault" element={<Vault />} />
-              <Route path="/reports" element={<Reports />} />
-              <Route path="*" element={<Navigate to="/dashboard" replace />} />
-            </Route>
+
+              <Route element={<AppShell />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/transactions" element={<Transactions />} />
+                <Route path="/vault" element={<Vault />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
+              </Route>
+            </>
           ) : (
             <Route path="*" element={<Navigate to="/login" replace />} />
           )}
