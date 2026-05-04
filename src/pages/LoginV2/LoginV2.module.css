@@ -55,37 +55,7 @@
 }
 
 /* ─── Ticker strip ───────────────────────────────────────── */
-.tickerStrip {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  gap: 2.5rem;
-  padding: 0.55rem 2rem;
-  background: rgba(8, 13, 18, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-  z-index: 10;
-  animation: tickerScroll 30s linear infinite;
-  white-space: nowrap;
-}
-
-@keyframes tickerScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.tickerItem {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  color: var(--text-2);
-  flex-shrink: 0;
-}
-.pos { color: var(--accent) !important; }
-.neg { color: var(--red) !important; }
+/* removido */
 
 /* ─── Card ───────────────────────────────────────────────── */
 .loginCard {
@@ -103,7 +73,7 @@
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  margin-top: 2rem; /* espaço para o ticker */
+  margin-top: 0;
 }
 
 .mounted .loginCard {
@@ -172,46 +142,7 @@
   line-height: 1.5;
 }
 
-/* ─── Stats row ──────────────────────────────────────────── */
-.statsRow {
-  display: flex;
-  align-items: center;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.75rem 1.1rem;
-  margin-bottom: 1.75rem;
-}
-
-.statPill {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-  align-items: center;
-}
-
-.statLabel {
-  font-size: 0.62rem;
-  font-family: var(--mono);
-  color: var(--text-3);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-}
-
-.statValue {
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-1);
-}
-
-.statDivider {
-  width: 1px;
-  height: 28px;
-  background: var(--border);
-  margin: 0 0.5rem;
-}
+/* ─── Stats row — removido ───────────────────────────────── */
 
 /* ─── Form ───────────────────────────────────────────────── */
 .loginForm {
@@ -376,21 +307,7 @@
 }
 .registerLink:hover { color: var(--accent); }
 
-/* ─── Security badge ─────────────────────────────────────── */
-.securityBadge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  margin-top: 1.25rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-3);
-  font-size: 0.68rem;
-  font-family: var(--mono);
-  letter-spacing: 0.04em;
-}
-.securityBadge svg { width: 13px; height: 13px; flex-shrink: 0; }
+/* ─── Security badge — removido ─────────────────────────── */
 
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 480px) {

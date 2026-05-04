@@ -49,14 +49,6 @@ export const LoginV2 = () => {
       <div className={styles.bgGrid} />
       <div className={styles.bgGlow} />
 
-      {/* Floating tickers */}
-      <div className={styles.tickerStrip}>
-        {["IBOV +1.42%", "USD/BRL 5.08", "SELIC 10.5%", "BTC +3.21%", "PETR4 +0.87%", "VALE3 -0.34%", "CDI 10.4%", "IPCA 4.62%",
-          "IBOV +1.42%", "USD/BRL 5.08", "SELIC 10.5%", "BTC +3.21%", "PETR4 +0.87%", "VALE3 -0.34%", "CDI 10.4%", "IPCA 4.62%"].map((t, i) => (
-          <span key={i} className={`${styles.tickerItem} ${t.includes("-") ? styles.neg : styles.pos}`}>{t}</span>
-        ))}
-      </div>
-
       <div className={styles.loginCard}>
         {/* Logo */}
         <div className={styles.logoBlock}>
@@ -82,30 +74,10 @@ export const LoginV2 = () => {
           </h1>
           <p className={styles.cardSubtitle}>
             {mode === 'signin'
-              ? 'Acesse sua carteira e acompanhe seu patrimônio'
+              ? 'Acesse sua conta e acompanhe suas finanças'
               : 'Informe seu email para receber o link de redefinição'}
           </p>
         </div>
-
-        {/* Stats row — só no signin */}
-        {mode === 'signin' && (
-          <div className={styles.statsRow}>
-            <div className={styles.statPill}>
-              <span className={styles.statLabel}>Portfólio</span>
-              <span className={`${styles.statValue} ${styles.pos}`}>+12.4%</span>
-            </div>
-            <div className={styles.statDivider} />
-            <div className={styles.statPill}>
-              <span className={styles.statLabel}>Meta Mensal</span>
-              <span className={styles.statValue}>87%</span>
-            </div>
-            <div className={styles.statDivider} />
-            <div className={styles.statPill}>
-              <span className={styles.statLabel}>Alertas</span>
-              <span className={`${styles.statValue} ${styles.neg}`}>3</span>
-            </div>
-          </div>
-        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className={styles.loginForm}>
@@ -186,7 +158,7 @@ export const LoginV2 = () => {
               <span className={styles.spinner} />
             ) : (
               <>
-                <span>{mode === 'signin' ? 'Entrar na plataforma' : 'Enviar email'}</span>
+                <span>{mode === 'signin' ? 'Entrar' : 'Enviar email'}</span>
                 <svg viewBox="0 0 20 20" fill="none">
                   <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -202,15 +174,6 @@ export const LoginV2 = () => {
             </button>
           </p>
         )}
-
-        {/* Security badge */}
-        <div className={styles.securityBadge}>
-          <svg viewBox="0 0 16 16" fill="none">
-            <path d="M8 1L2 3.5v5C2 12 5 14.5 8 15c3-0.5 6-3 6-6.5v-5L8 1z" stroke="currentColor" strokeWidth="1.2"/>
-            <path d="M5.5 8l1.5 1.5 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span>Conexão segura · Criptografia 256-bit</span>
-        </div>
       </div>
     </div>
   );
