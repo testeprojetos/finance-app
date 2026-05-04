@@ -39,10 +39,8 @@ const App: React.FC = () => {
             path="/login"
             element={user ? <Navigate to="/dashboard" replace /> : <Login />}
           />
-          <Route
-            path="/login-v2"
-            element={user ? <Navigate to="/dashboard" replace /> : <LoginV2 />}
-          />
+          {/* Login V2 — sempre acessível para preview, independente do estado de auth */}
+          <Route path="/login-v2" element={<LoginV2 />} />
 
           {/* Rotas protegidas */}
           {user ? (
