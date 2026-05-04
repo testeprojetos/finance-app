@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { formatMonthLabel, addMonths } from '../../utils/date';
+import { MonthPicker } from './MonthPicker';
 import styles from './MonthCarousel.module.css';
 
 interface MonthCarouselProps {
@@ -39,6 +40,7 @@ export const MonthCarousel: React.FC<MonthCarouselProps> = ({
         <span className={styles.label}>
           {formatMonthLabel(selectedMonthKey)}
         </span>
+        <MonthPicker selectedMonthKey={selectedMonthKey} onSelect={onSelect} />
         {hasData && <span className={styles.dot} aria-hidden="true" />}
       </div>
 
