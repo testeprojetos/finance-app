@@ -11,6 +11,7 @@ import { ToastProvider } from './components/ui/Toast';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
 import { Login } from './pages/LoginV2/LoginV2';
 import { Dashboard } from './pages/Dashboard/Dashboard';
+import { DashboardV2 } from './pages/DashboardV2/DashboardV2';
 import { Transactions } from './pages/Transactions/Transactions';
 import { Reports } from './pages/Reports/Reports';
 import { Vault } from './pages/Vault/Vault';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           {user ? (
             <Route element={<AppShell />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard-v2" element={<DashboardV2 />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/vault" element={<Vault />} />
               <Route path="/reports" element={<Reports />} />
