@@ -10,7 +10,6 @@ import {
   deleteDoc,
   doc,
   getDocs,
-  orderBy,
   query,
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
@@ -23,9 +22,11 @@ const vaultCollection = (userId: string) =>
  * Busca todas as movimentações do cofre, ordenadas por data desc.
  */
 export const getVaultEntries = async (userId: string): Promise<VaultEntry[]> => {
-  const q = query(vaultCollection(userId), orderBy('date', 'desc'));
+  const q = query(vaultCollection(userId));
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as VaultEntry));
+  return snapshot.docs
+    .map((d) => ({ id: d.id, ...d.data() } as VaultEntry))
+    .sort((a, b) => b.date.localeCompare(a.date));
 };
 
 /**

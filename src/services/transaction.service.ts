@@ -13,7 +13,6 @@ import {
   query,
   where,
   getDocs,
-  orderBy,
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { COLLECTIONS } from '../config/constants';
@@ -34,11 +33,12 @@ export const getTransactionsByMonth = async (
 ): Promise<Transaction[]> => {
   const q = query(
     txCollection(userId),
-    where('monthKey', '==', monthKey),
-    orderBy('date', 'desc')
+    where('monthKey', '==', monthKey)
   );
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Transaction));
+  return snapshot.docs
+    .map((d) => ({ id: d.id, ...d.data() } as Transaction))
+    .sort((a, b) => b.date.localeCompare(a.date));
 };
 
 /**
@@ -52,12 +52,12 @@ export const getTransactionsByPeriod = async (
   const q = query(
     txCollection(userId),
     where('monthKey', '>=', fromMonthKey),
-    where('monthKey', '<=', toMonthKey),
-    orderBy('monthKey', 'asc'),
-    orderBy('date', 'asc')
+    where('monthKey', '<=', toMonthKey)
   );
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Transaction));
+  return snapshot.docs
+    .map((d) => ({ id: d.id, ...d.data() } as Transaction))
+    .sort((a, b) => a.date.localeCompare(b.date));
 };
 
 /**

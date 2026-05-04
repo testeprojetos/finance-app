@@ -54,26 +54,32 @@ export const Dashboard: React.FC = () => {
     load();
   }, [selectedMonthKey, user]);
 
-  // Carrega subcategorias e cofre uma única vez
+  // Carrega subcategorias e cofre uma única vez — erros independentes
   useEffect(() => {
     if (!user) return;
 
-    const load = async () => {
+    const loadSubs = async () => {
       useTransactionStore.getState().setLoadingSubcategories(true);
       try {
-        const [subs, vaultData] = await Promise.all([
-          getAllSubcategories(user.uid),
-          getVaultEntries(user.uid),
-        ]);
+        const subs = await getAllSubcategories(user.uid);
         setSubcategories(subs);
-        setVaultEntries(vaultData);
-      } catch {
-        showToast('Erro ao carregar dados.', 'error');
+      } catch (err) {
+        console.error('Erro ao carregar subcategorias:', err);
         useTransactionStore.getState().setLoadingSubcategories(false);
       }
     };
 
-    load();
+    const loadVault = async () => {
+      try {
+        const vaultData = await getVaultEntries(user.uid);
+        setVaultEntries(vaultData);
+      } catch (err) {
+        console.error('Erro ao carregar cofre:', err);
+      }
+    };
+
+    loadSubs();
+    loadVault();
   }, [user]);
 
   // Meses com dados (para indicador no carrossel)

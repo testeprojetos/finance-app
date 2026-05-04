@@ -25,7 +25,7 @@ const subCollection = (userId: string) =>
  * Busca todas as subcategorias do usuário.
  */
 export const getAllSubcategories = async (userId: string): Promise<Subcategory[]> => {
-  const q = query(subCollection(userId), orderBy('categoryId'), orderBy('name'));
+  const q = query(subCollection(userId), orderBy('name'));
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Subcategory));
 };
@@ -39,11 +39,12 @@ export const getSubcategoriesByCategory = async (
 ): Promise<Subcategory[]> => {
   const q = query(
     subCollection(userId),
-    where('categoryId', '==', categoryId),
-    orderBy('name')
+    where('categoryId', '==', categoryId)
   );
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Subcategory));
+  return snapshot.docs
+    .map((d) => ({ id: d.id, ...d.data() } as Subcategory))
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 /**
