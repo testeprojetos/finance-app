@@ -32,6 +32,11 @@ interface UIState {
   savingsGoalModal: boolean;
   openSavingsGoalModal: () => void;
   closeSavingsGoalModal: () => void;
+
+  // Modal de lançamentos futuros (parcelamentos)
+  installmentModal: boolean;
+  openInstallmentModal: () => void;
+  closeInstallmentModal: () => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -53,4 +58,8 @@ export const useUIStore = create<UIState>((set) => ({
   savingsGoalModal: false,
   openSavingsGoalModal: () => set({ savingsGoalModal: true }),
   closeSavingsGoalModal: () => set({ savingsGoalModal: false }),
+
+  installmentModal: false,
+  openInstallmentModal: () => set({ installmentModal: true }),
+  closeInstallmentModal: () => set({ installmentModal: false }),
 }));
