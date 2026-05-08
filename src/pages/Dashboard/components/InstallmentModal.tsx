@@ -42,9 +42,6 @@ export const InstallmentModal: React.FC<InstallmentModalProps> = ({ open, onClos
   // Subcategorias filtradas pela categoria selecionada
   const categorySubs = subcategories.filter((s) => s.categoryId === form.categoryId);
 
-  // Todas as categorias disponíveis
-  const allCategories = [...EXPENSE_CATEGORIES, ...INCOME_CATEGORIES];
-
   // Calcula a data da primeira parcela ao mudar a data de compra
   const firstInstallmentDate = form.purchaseDate
     ? calcFirstInstallmentDate(form.purchaseDate)
