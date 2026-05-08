@@ -8,6 +8,7 @@ import { useUIStore } from '../../../store/ui.store';
 import { useTransactionStore } from '../../../store/transaction.store';
 import { Button } from '../../../components/ui/Button';
 import { SavingsGoalModal } from './SavingsGoalModal';
+import { InstallmentModal } from './InstallmentModal';
 import styles from './MonthHeader.module.css';
 
 interface MonthHeaderProps {
@@ -15,7 +16,14 @@ interface MonthHeaderProps {
 }
 
 export const MonthHeader: React.FC<MonthHeaderProps> = ({ monthKey }) => {
-  const { savingsGoalModal, openSavingsGoalModal, closeSavingsGoalModal } = useUIStore();
+  const {
+    savingsGoalModal,
+    openSavingsGoalModal,
+    closeSavingsGoalModal,
+    installmentModal,
+    openInstallmentModal,
+    closeInstallmentModal,
+  } = useUIStore();
   const { monthlySummary } = useTransactionStore();
 
   return (
@@ -31,15 +39,25 @@ export const MonthHeader: React.FC<MonthHeaderProps> = ({ monthKey }) => {
             <p className={styles.noGoal}>Sem meta definida</p>
           )}
         </div>
-        <Button variant="ghost" size="sm" onClick={openSavingsGoalModal}>
-          🎯 Meta
-        </Button>
+        <div className={styles.actions}>
+          <Button variant="ghost" size="sm" onClick={openInstallmentModal}>
+            📅 Parcelar
+          </Button>
+          <Button variant="ghost" size="sm" onClick={openSavingsGoalModal}>
+            🎯 Meta
+          </Button>
+        </div>
       </div>
 
       <SavingsGoalModal
         open={savingsGoalModal}
         onClose={closeSavingsGoalModal}
         monthKey={monthKey}
+      />
+
+      <InstallmentModal
+        open={installmentModal}
+        onClose={closeInstallmentModal}
       />
     </>
   );

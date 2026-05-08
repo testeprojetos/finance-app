@@ -38,6 +38,38 @@ export interface Transaction {
   type: TransactionType;
   monthKey: string; // formato: "YYYY-MM" — facilita queries por mês
   createdAt: string; // ISO 8601
+  // Campos de parcelamento (presentes apenas em transações geradas por um plano)
+  installmentPlanId?: string; // ID do plano pai
+  installmentNumber?: number; // número da parcela (1-based)
+  totalInstallments?: number; // total de parcelas do plano
+}
+
+// --- Plano de parcelamento ---
+
+export interface InstallmentPlan {
+  id: string;
+  categoryId: string;
+  subcategoryId?: string;
+  description: string;       // ex: "Celular"
+  totalAmount: number;       // valor total da compra
+  installmentAmount: number; // valor de cada parcela (pode ser editado)
+  totalInstallments: number; // quantidade de parcelas
+  purchaseDate: string;      // data da compra (YYYY-MM-DD)
+  firstInstallmentDate: string; // sempre dia 01 do mês seguinte à compra
+  observation?: string;
+  type: TransactionType;
+  createdAt: string;
+}
+
+export interface InstallmentFormData {
+  categoryId: string;
+  subcategoryId?: string;
+  description: string;
+  totalAmount: string;       // string para input, convertido antes de salvar
+  installmentAmount: string; // editável pelo usuário
+  totalInstallments: string; // número de parcelas
+  purchaseDate: string;      // data da compra
+  observation?: string;
 }
 
 // --- Resumo mensal (calculado no frontend) ---
